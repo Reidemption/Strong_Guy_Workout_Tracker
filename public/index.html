@@ -121,7 +121,7 @@
       </div>
       <!-- WORKOUTS -->
       <div v-if="page === 'workouts'">
-        <dasd id="stack-pls">
+        <div id="stack-pls">
           <div class="btn" id="workoutcreate" @click="page = 'workoutCreate'">
             Create a Workout
           </div>
@@ -137,7 +137,7 @@
           <div id="btnlogout" @click="logoutUser()">
             Logout <br />
           </div>
-        </dasd>
+        </div>
 
         <li v-for="workout in workouts">
           <ul class="box3">
