@@ -7,6 +7,7 @@
 Attributes:
 
 - id (Object Id)
+- user_id (Object Id)
 - email (string)
 - password (string)
 - pastworkouts (list of previous workouts)
@@ -16,6 +17,7 @@ Attributes:
 Attributes:
 
 - id (Object Id)
+- user_id (Object Id)
 - name (string)
 - exercises (list of objects)
 - created (date)
@@ -32,6 +34,7 @@ Attributes:
 ```js
 const workoutSchema = new mongoose.Schema({
   name: { type: String },
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   exercises: [
     {
       name: { type: String },
@@ -52,6 +55,8 @@ const performedWorkoutSchema = mongoose.Schema({
       },
     },
   ],
+  time: { type: String },
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const userSchema = new mongoose.Schema({
@@ -68,9 +73,8 @@ const userSchema = new mongoose.Schema({
 | Retrieve All Users      | GET    | /users                  |
 | Create New User         | POST   | /users                  |
 | Authenticate Sign In    | POST   | /authenticate           |
-| Retrieve All Workouts   | GET    | /workouts               |
 | Create New Workout      | POST   | /workouts               |
-| Get Specific Workout    | GET    | /workouts/_\<id\>_      |
+| Get User Workouts    | GET    | /workouts/      |
 | Delete Specific Workout | DELETE | /workouts/_\<id\>_      |
 | Save Completed Workout  | POST   | /workouts/finishWorkout |
 
