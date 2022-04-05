@@ -5,7 +5,7 @@ var app = new Vue({
   el: "#app",
   data: {
     workouts: [],
-    page: "login", //login, workouts, workoutCreate, workout, history
+    page: "", //login, workouts, workoutCreate, workout, history
     email: "",
     password: "",
     loggedInUser: "",
