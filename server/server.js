@@ -78,35 +78,39 @@ app.post("/users", async (req, res) => {
     res.status(422).send("Fields missing");
     return;
   }
-  User.create(
-    {
-      email: req.body.email,
-      password: hashedPassword,
-    },
-    (err, user) => {
-      if (err) {
-        console.err(err);
-        res.status(400);
-        return;
+  try {
+    User.create(
+      {
+        email: req.body.email,
+        password: hashedPassword,
+      },
+      (err, user) => {
+        if (err) {
+          console.err(err);
+          res.status(400);
+          return;
+        }
+        console.log("User was created");
+        res.status(201).json(user);
       }
-      console.log("User was created");
-      res.status(201).json(user);
-    }
-  );
+    );
+  } catch (err) {
+    res.status(409).send("Email has already been taken.");
+  }
 });
 
 app.get("/users", (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  console.log(`Getting specific thread with id:${req.user._id}`);
+  console.log(`Getting specific user with id:${req.user._id}`);
   User.findById(req.user._id, (err, user) => {
     if (err != null) {
       res.status(500).json({
         err: err,
-        message: "Unable to find thread with that id",
+        message: "Unable to find user with that id",
       });
       return;
     } else if (user === null) {
-      res.status(404).json({ message: `unable to find threads`, error: err });
+      res.status(404).json({ message: `unable to find users`, error: err });
       return;
     }
     res.status(200).json(user);
