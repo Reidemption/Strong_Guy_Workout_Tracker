@@ -1,5 +1,5 @@
-// const url = "https://strong-guy.herokuapp.com";
-const url = "http://localhost:8080";
+const url = "https://strong-guy-sec.herokuapp.com";
+// const url = "http://localhost:8080";
 
 var app = new Vue({
   el: "#app",
@@ -114,7 +114,7 @@ var app = new Vue({
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       }).then(function (response) {
         if (response.status == 204) {
           app.user = {};
@@ -122,10 +122,10 @@ var app = new Vue({
         } else {
           alert("Unable to logout. Try again.");
         }
-      })
+      });
     },
     loginUser: function () {
-      if (!this.email || !this.password) { 
+      if (!this.email || !this.password) {
         this.errorMessage();
         return;
       }
@@ -146,7 +146,7 @@ var app = new Vue({
           app.email = "";
           app.password = "";
           app.error_message = "";
-          
+
           app.page = "workouts";
           response.json().then(function (data) {
             //console.log(data);
@@ -283,7 +283,7 @@ var app = new Vue({
       });
     },
   },
-  created: function () { 
+  created: function () {
     this.checkSession();
   },
 });
