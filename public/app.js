@@ -1,5 +1,5 @@
-const url = "https://strong-guy-sec.herokuapp.com";
-// const url = "http://localhost:8080";
+// const url = "https://strong-guy-sec.herokuapp.com";
+const url = "http://localhost:8080";
 
 var app = new Vue({
   el: "#app",
@@ -79,10 +79,7 @@ var app = new Vue({
         if (response.status == 201) {
           alert("User created!\nNow Signed In :^)");
           app.loginUser();
-          // app.email = "";
-          // app.password = "";
           app.error_message = "";
-          //app.getUsers();
         } else {
           app.errorMessage(
             "Unable to create user. Try again with values in both fields"
@@ -118,6 +115,7 @@ var app = new Vue({
       }).then(function (response) {
         if (response.status == 204) {
           app.user = {};
+          app.exercisesArr = [];
           app.page = "login";
         } else {
           alert("Unable to logout. Try again.");

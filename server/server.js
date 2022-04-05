@@ -59,18 +59,8 @@ passport.deserializeUser(function (userId, done) {
       done(err);
     });
 });
-// app.get("/users", async (req, res) => {
-//   console.log("Get all users; for dev purposes only.");
-//   User.find({}, function (err, users) {
-//     if (err) {
-//       console.log("Found an error when fetching all users.");
-//       res.status(400);
-//       return;
-//     }
-//     res.json(users);
-//   });
-// });
 
+//create user
 app.post("/users", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   console.log(hashedPassword);
@@ -101,6 +91,10 @@ app.post("/users", async (req, res) => {
 });
 
 app.get("/users", (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
   res.setHeader("Content-Type", "application/json");
   console.log(`Getting specific user with id:${req.user._id}`);
   User.findById(req.user._id, (err, user) => {
@@ -117,6 +111,7 @@ app.get("/users", (req, res) => {
     res.status(200).json(user);
   });
 });
+
 app.post("/session", passport.authenticate("local"), async (req, res) => {
   res.status(201).json(req.user);
   // console.log(req.user);
@@ -141,7 +136,7 @@ app.get("/workouts", async (req, res) => {
   }
   res.setHeader("Content-Type", "application/json");
   console.log("returning all workouts");
-  Workout.find({user_id: req.user._id}, (err, workouts) => {
+  Workout.find({ user_id: req.user._id }, (err, workouts) => {
     if (err != null) {
       res.status(400).json({
         error: err,
@@ -225,28 +220,39 @@ app.post("/finishWorkout", function async(req, res) {
 });
 
 app.get("/workouts/:id", async (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
   res.setHeader("Content-Type", "application/json");
   console.log("Fetching one workout", req.params.id);
-  Workout.findById(req.params.id, (err, workout) => {
-    if (err) {
-      console.log(`cannot find workout with ${req.params.id}`);
-      res.status(500).json({
-        message: "Unable to find workout with given id",
-        error: err,
-      });
-      return;
-    } else if (workout === null) {
-      res.status(404).json({
-        message: `Unable to find workout with id: ${req.params.id}`,
-        error: err,
-      });
-      return;
+  Workout.findOne(
+    { _id: req.params.id, user_id: req.user_id },
+    (err, workout) => {
+      if (err) {
+        console.log(`cannot find workout with ${req.params.id}`);
+        res.status(500).json({
+          message: "Unable to find workout with given id",
+          error: err,
+        });
+        return;
+      } else if (workout === null) {
+        res.status(404).json({
+          message: `Unable to find workout with id: ${req.params.id}`,
+          error: err,
+        });
+        return;
+      }
+      res.status(200).json(workout);
     }
-    res.status(200).json(workout);
-  });
+  );
 });
 
 app.patch("/workouts/:id", async (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
   res.setHeader("Content-Type", "application/json");
   console.log("Updating the body", req.body);
   let updateBody = {};
@@ -260,6 +266,7 @@ app.patch("/workouts/:id", async (req, res) => {
   Workout.updateOne(
     {
       _id: req.params.id,
+      user_id: req.user._id,
     },
     { $set: updateBody },
     function (err, res) {
@@ -279,19 +286,26 @@ app.patch("/workouts/:id", async (req, res) => {
 });
 
 app.delete("/workouts/:id", function (req, res) {
+  if (!req.user) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
   res.setHeader("Content-Type", "application/json");
   console.log(`Deleting workout with id: ${req.params.id}`);
-  Workout.findByIdAndDelete(req.params.id, (err, workout) => {
-    if (err || workout === null) {
-      console.log(`Error while deleting ${req.params.id}`);
-      res.status(404).json({
-        message: "Unable to delete workout.",
-        error: err,
-      });
-      return;
+  Workout.findOneAndDelete(
+    { _id: req.params.id, user_id: req.user_id },
+    (err, workout) => {
+      if (err || workout === null) {
+        console.log(`Error while deleting ${req.params.id}`);
+        res.status(404).json({
+          message: "Unable to delete workout.",
+          error: err,
+        });
+        return;
+      }
+      res.status(200).json(workout);
     }
-    res.status(200).json(workout);
-  });
+  );
 });
 
 // load up a workout
