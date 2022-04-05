@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:700,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strong Guy 💪 | Reid Gubler Midterm Project</title>
+  </head>
+  <body>
+    <div v-cloak id="app">
+      <!-- VIEW PAST COMPLETED WORKOUTS -->
+      <div v-if="page === 'history'">
+        <br />
+        <div>
+          <li v-for="wt,index in pastWorkouts">
+            <ul class="box3" id="center-info">
+              <strong>{{wt.time}}</strong>
+              <li v-for="workout in wt.workout">
+                <ul>
+                  {{workout.exercise}}
+                  <li v-for="z in workout.performed">
+                    <ul>
+                      Reps: {{z.reps}} for {{z.pounds}}lbs
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <div id="btnReturn" @click="page = 'workouts'">
+            Return to Workout Page
+          </div>
+        </div>
+      </div>
+      <!-- LOGIN PAGE -->
+      <div v-if="page === 'login'">
+        <br /><br /><br /><br /><br />
+        <div class="box2">
+          <h1>Strong Guy 💪</h1>
+          <h4>Become a "Strong Guy"</h4>
+          <input
+            type="email"
+            name="email"
+            class="email"
+            v-model="email"
+            placeholder="email@email.com"
+          />
+
+          <input
+            type="password"
+            name="password"
+            value="password"
+            class="password"
+            v-model="password"
+            placeholder="••••••"
+          />
+          <br />
+          <span v-if="error_message" id="error"> {{ error_message }}</span>
+
+          <div class="btn" @click="loginUser()">Sign In</div>
+
+          <div id="btn2" v-on:click="createUser()">Sign Up</div>
+        </div>
+      </div>
+      <!-- PERFORMING A WORKOUT -->
+      <div v-if="page === 'workout'">
+        <div class="box4">
+          <h2>{{current_workout.name}}</h2>
+          <span>{{timer}}</span>
+          <div>
+            <div v-for="exercise in current_workout.exercises">
+              <br />
+              <strong>{{exercise.name}}</strong>
+              <div v-for="set in exercise.sets">
+                <strong>Reps:</strong
+                ><input
+                  type="number"
+                  class="email-trimmed"
+                  v-model="reps"
+                  :placeholder="exercise.reps"
+                  type="number"
+                /><input
+                  type="number"
+                  class="email-trimmed"
+                  v-model="pounds"
+                  type="number"
+                />lbs.
+                <input type="checkbox" name="check" @click="addItem()" />
+                <br />
+              </div>
+              <div id="save-exercise" @click="performedIntoWorkout()">
+                Save Progress
+              </div>
+
+              <br />
+              <br />
+              <br />
+            </div>
+            <div id="center-fold">
+              <div id="btnWorkout" @click="finishWorkout()">Save Workout</div>
+              <div id="btnDelete" @click="seconds=0;page='workouts'">
+                Quit Workout
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WORKOUTS -->
+      <div v-if="page === 'workouts'">
+        <dasd id="stack-pls">
+          <div class="btn" id="workoutcreate" @click="page = 'workoutCreate'">
+            Create a Workout
+          </div>
+          <div
+            class="btn-history"
+            id="workoutcreate"
+            @click="page = 'history'
+            ;
+            loadWorkoutHistory()"
+          >
+            View Workout History
+          </div>
+          <div id="btnlogout" @click="logoutUser()">
+            Logout <br />
+          </div>
+        </dasd>
+
+        <li v-for="workout in workouts">
+          <ul class="box3">
+            <div>{{workout.name}}</div>
+            <div v-for="exercise in workout.exercises">
+              <strong>{{exercise.name}}</strong>:
+              {{exercise.sets}}x{{exercise.reps}}
+            </div>
+            <!-- {{workout.created}} -->
+            <div id="spacing">
+              <div id="btnDelete" @click="deleteWorkout(workout._id)">
+                Delete Exercise
+              </div>
+              <div
+                id="btnWorkout"
+                @click="loadWorkout(workout); reallyStartTimer()"
+              >
+                Start Exercise
+              </div>
+            </div>
+          </ul>
+        </li>
+        <span> {{error_message}} </span>
+      </div>
+      <!-- CREATING A WORKOUT -->
+      <div class="box" v-if="page === 'workoutCreate'">
+        <div>
+          Give your workout a name:
+          <input type="text" v-model="name" class="email" />
+        </div>
+        <div v-if="exercisesArr" v-for="(exercise,index) in exercisesArr">
+          <span><strong>{{exercisesArr[index].name}}</strong> </span>
+          <span
+            >{{exercisesArr[index].sets}}<strong>x</strong>{{exercisesArr[index].reps}}
+          </span>
+          <br />
+        </div>
+        <div id="workoutInput">
+          <span>Exercise No. {{i}} name: </span>
+          <input v-model="exercise_name" class="email" type="text" />
+          <span>Number of Sets: </span>
+          <input v-model="exercise_set" class="email" type="number" />
+          <span>Number of Reps per Set: </span>
+          <input v-model="exercise_rep" class="email" type="number" />
+          <div id="btn3" @click="pushToLists()">Save Exercise</div>
+          <div id="btn4" @click="createWorkout(); page='workouts'">
+            Save Workout
+          </div>
+          <div id="btn5" @click="page = 'workouts'; getWorkouts()">
+            Cancel and Show Workouts
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,402 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  background: #3498db;
+  margin: 0 auto 0 auto;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0px 20px 0px;
+}
+
+p {
+  font-size: 12px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 1.5em;
+  color: #525252;
+}
+h4 {
+  color: #525252;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.topnav {
+  background-color: #525252;
+  display: flex;
+  /* overflow: hidden; */
+  height: 25px;
+}
+
+.topnav span {
+  float: right;
+  text-align: center;
+  padding: 14xp 16px;
+  font-size: 15px;
+  text-decoration: none;
+  margin: 0 auto 0 auto;
+  align-items: center;
+}
+
+.topnav span:hover {
+  cursor: pointer;
+  background-color: #6d6b6b;
+}
+/* box info */
+.box {
+  background: white;
+  width: 300px;
+  border-radius: 6px;
+  margin: 0 auto 0 auto;
+  padding: 0px 0px 140px 0px;
+  border: #2980b9 4px solid;
+}
+.box2 {
+  background: white;
+  width: 300px;
+  border-radius: 6px;
+  margin: 0 auto 0 auto;
+  padding: 0px 0px 70px 0px;
+  border: #2980b9 4px solid;
+}
+
+.box3 {
+  background: white;
+  width: 300px;
+  border-radius: 6px;
+  margin: 5px auto 15px auto;
+  padding: 0px;
+  border: #2980b9 4px solid;
+  /* height: auto; */
+  /* min-height: 150px; */
+}
+
+.box4 {
+  background: white;
+  /* width: 300px; */
+  width: 50%;
+  border-radius: 6px;
+  margin: 0 auto 30px auto;
+  padding: 0px 0px 75px 0px;
+  border: #2980b9 4px solid;
+}
+
+.email {
+  background: #ecf0f1;
+  border: #ccc 1px solid;
+  border-bottom: #ccc 2px solid;
+  padding: 8px;
+  width: 250px;
+  color: #000000;
+  margin-top: 10px;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.email-trimmed {
+  background: #ecf0f1;
+  border: #ccc 1px solid;
+  border-bottom: #ccc 2px solid;
+  padding: 10px;
+  width: 250px;
+  color: #000000;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 3px;
+  font-size: 1em;
+  border-radius: 4px;
+  width: 75px;
+  height: auto;
+}
+/* 
+.email-trimmed input {
+  width: 15px;
+} */
+
+.password {
+  border-radius: 4px;
+  background: #ecf0f1;
+  border: #ccc 1px solid;
+  padding: 8px;
+  width: 250px;
+  font-size: 1em;
+  margin-top: 10px;
+}
+/* button classes/ids */
+.btn {
+  background: #2ecc71;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #27ae60 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 16px;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+.btn:hover {
+  background: #2cc06b;
+  cursor: pointer;
+}
+
+#btn2 {
+  float: left;
+  background: #3498db;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #2980b9 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btn2:hover {
+  background: #3594d2;
+  cursor: pointer;
+}
+
+#btn3 {
+  background: #2ecc71;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #27ae60 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 16px;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btn3:hover {
+  cursor: pointer;
+}
+#btn4 {
+  background: #e4b533;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #b68c1a 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 16px;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btn4:hover {
+  cursor: pointer;
+}
+
+#btn5 {
+  background: red;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #851414 1px solid;
+
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 28%;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btn5:hover {
+  cursor: pointer;
+}
+
+#btnDelete {
+  background: red;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #851414 1px solid;
+
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 28%;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btnDelete:hover {
+  cursor: pointer;
+  background: rgb(225, 0, 0);
+}
+
+#btnlogout {
+    background: red;
+    width: 75px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    border-radius: 4px;
+    border: #851414 1px solid;
+    margin-left: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 800;
+    font-size: 0.8em;
+}
+
+#btnlogout:hover {
+  cursor: pointer;
+  background: rgb(225, 0, 0);
+}
+
+#btnWorkout {
+  background: rgb(255, 187, 0);
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #7a4c0f 1px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  margin-left: 28%;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btnWorkout:hover {
+  cursor: pointer;
+  background: rgb(211, 155, 0);
+}
+
+#btnReturn {
+  background: rgb(255, 187, 0);
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #7a4c0f 1px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  margin-left: 45%;
+  margin-right: auto;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#btnReturn:hover {
+  cursor: pointer;
+  background: rgb(211, 155, 0);
+}
+
+#spacing {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#stack-pls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.btn-history {
+  background: #2ecc71;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #27ae60 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 16px;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+.btn-history:hover {
+  background: #2cc06b;
+  cursor: pointer;
+}
+
+#error {
+  color: red;
+  font-size: small;
+}
+
+.btn #workoutCreate {
+  margin-top: auto;
+  display: flex;
+}
+
+#center-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#center-fold {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+#save-exercise {
+  background: #2e92cc;
+  width: 125px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 4px;
+  border: #2679a8 1px solid;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+  margin-left: 39%;
+  font-weight: 800;
+  font-size: 0.8em;
+}
+
+#save-exercise:hover {
+  background: #5398c0;
+  cursor: pointer;
+}
+
+[v-cloak] {
+  display: none;
+}
