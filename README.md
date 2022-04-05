@@ -80,4 +80,4 @@ const userSchema = new mongoose.Schema({
 
 ## Hosted URL
 
-https://strong-guy.herokuapp.com/
+https://strong-guy-sec.herokuapp.com/
