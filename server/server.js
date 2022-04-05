@@ -78,25 +78,26 @@ app.post("/users", async (req, res) => {
     res.status(422).send("Fields missing");
     return;
   }
-  try {
-    User.create(
-      {
-        email: req.body.email,
-        password: hashedPassword,
-      },
-      (err, user) => {
-        if (err) {
-          console.err(err);
-          res.status(400);
-          return;
-        }
-        console.log("User was created");
-        res.status(201).json(user);
-      }
-    );
-  } catch (err) {
-    res.status(409).send("Email has already been taken.");
+  const newEmail = await User.findOne({ email: req.body.email });
+  if (newEmail) {
+    res.status(409).send("Email already exists");
+    return;
   }
+  User.create(
+    {
+      email: req.body.email,
+      password: hashedPassword,
+    },
+    (err, user) => {
+      if (err) {
+        console.err(err);
+        res.status(400);
+        return;
+      }
+      console.log("User was created");
+      res.status(201).json(user);
+    }
+  );
 });
 
 app.get("/users", (req, res) => {
