@@ -1,5 +1,5 @@
-// const url = "https://strong-guy-sec.herokuapp.com";
-const url = "http://localhost:8080";
+const url = "https://strong-guy-sec.herokuapp.com";
+// const url = "http://localhost:8080";
 
 var app = new Vue({
   el: "#app",
